@@ -42,8 +42,9 @@ class MultiDayOutput(BaseModel):
 class DiaryGenerationAgent:
     """Single-call diary generation with date-mapped input."""
 
-    def __init__(self, llm_client=None):
-        self.llm = llm_client or get_llm_client()
+    def __init__(self, llm_client=None, credentials: Optional[Dict[str, str]] = None):
+        provider = credentials.get("llm_provider") if credentials else None
+        self.llm = llm_client or get_llm_client(provider=provider, api_keys=credentials)
         self.date_manager = DateManager()
         self.skills_list = get_skills_list()
         self.system_prompt = self._load_prompt("god_mode_system.txt") or self._load_prompt("multi_day_system.txt")

@@ -38,13 +38,14 @@ class LLMClient:
     using whichever has a valid API key.
     """
 
-    def __init__(self, provider: str = LLM_PROVIDER, max_retries: int = LLM_MAX_RETRIES):
+    def __init__(self, provider: str = LLM_PROVIDER, max_retries: int = LLM_MAX_RETRIES, api_keys: Optional[Dict[str, str]] = None):
         self.max_retries = max_retries
+        self.api_keys = api_keys or {}
         self.providers = self._build_chain(provider)
         self.active_idx = 0
 
         if not self.providers:
-            raise LLMError("No LLM providers available. Set at least one API key in .env")
+            raise LLMError("No LLM providers available. Set at least one API key in .env or pass api_keys")
 
         names = [p[0] for p in self.providers]
         logger.info(f"Initialized LLM client: {names[0]} (fallbacks: {names[1:]})")
@@ -53,12 +54,18 @@ class LLMClient:
         """Build ordered list of (name, provider_instance) with primary first."""
         available = []
 
+        # Resolve keys: prefer passed api_keys, fallback to env config
+        groq_key = self.api_keys.get("groq_api_key") or GROQ_API_KEY
+        gemini_key = self.api_keys.get("gemini_api_key") or GEMINI_API_KEY
+        cerebras_key = self.api_keys.get("cerebras_api_key") or CEREBRAS_API_KEY
+        openai_key = self.api_keys.get("openai_api_key") or OPENAI_API_KEY
+
         # Map of provider name → (api_key, factory)
         registry = {
-            "groq": (GROQ_API_KEY, lambda: GroqClient(GROQ_API_KEY)),
-            "gemini": (GEMINI_API_KEY, lambda: GeminiClient(GEMINI_API_KEY)),
-            "cerebras": (CEREBRAS_API_KEY, lambda: CerebrasClient(CEREBRAS_API_KEY)),
-            "openai": (OPENAI_API_KEY, lambda: OpenAIClient(OPENAI_API_KEY)),
+            "groq": (groq_key, lambda: GroqClient(groq_key)),
+            "gemini": (gemini_key, lambda: GeminiClient(gemini_key)),
+            "cerebras": (cerebras_key, lambda: CerebrasClient(cerebras_key)),
+            "openai": (openai_key, lambda: OpenAIClient(openai_key)),
         }
 
         # If primary is "auto", just use the fallback chain order
@@ -167,6 +174,6 @@ class LLMClient:
         return {}
 
 
-def get_llm_client(provider: Optional[str] = None) -> LLMClient:
+def get_llm_client(provider: Optional[str] = None, api_keys: Optional[Dict[str, str]] = None) -> LLMClient:
     """Get LLM client. Use provider='auto' for automatic fallback."""
-    return LLMClient(provider=provider or LLM_PROVIDER)
+    return LLMClient(provider=provider or LLM_PROVIDER, api_keys=api_keys)
