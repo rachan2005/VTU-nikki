@@ -1,0 +1,4 @@
+9:30-11:00 wrote tests - found failing API, fixed & pushed commit abc123
+14:00 met Prof. Sharma about experiment design sample rate
+prepared slides for Friday
+refactor parser (incomplete)

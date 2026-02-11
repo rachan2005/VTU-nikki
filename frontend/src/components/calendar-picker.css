@@ -1,0 +1,44 @@
+/* Calendar picker custom styles */
+.calendar-picker-wrapper .rdp {
+  --rdp-cell-size: 40px;
+  --rdp-accent-color: hsl(var(--primary));
+  --rdp-background-color: hsl(var(--primary) / 0.1);
+  margin: 0;
+}
+
+.calendar-picker-wrapper .rdp-months {
+  justify-content: center;
+}
+
+.calendar-picker-wrapper .rdp-day_selected {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  font-weight: 600;
+}
+
+.calendar-picker-wrapper .rdp-day_today {
+  font-weight: bold;
+  color: hsl(var(--primary));
+}
+
+.calendar-picker-wrapper .rdp-day:hover:not(.rdp-day_selected):not(.rdp-day_disabled) {
+  background-color: hsl(var(--accent));
+}
+
+.calendar-picker-wrapper .rdp-day_disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.calendar-picker-wrapper .rdp-head_cell {
+  color: hsl(var(--muted-foreground));
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.calendar-picker-wrapper .rdp-caption {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0;
+  font-weight: 600;
+}
