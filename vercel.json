@@ -1,5 +1,15 @@
 {
     "version": 2,
     "cleanUrls": true,
-    "trailingSlash": false
+    "trailingSlash": false,
+    "routes": [
+        {
+            "src": "/frontend/(.*)",
+            "dest": "/frontend/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/index.html"
+        }
+    ]
 }
