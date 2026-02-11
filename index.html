@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VTU Diary // GOD MODE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #050505;
+            color: #fff;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #ff4d4d, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .animate-pulse-slow {
+            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: .5;
+            }
+        }
+    </style>
+</head>
+
+<body class="flex flex-col items-center justify-center min-h-screen p-6 overflow-hidden">
+    <!-- Ambient Background -->
+    <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div
+            class="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-red-600/10 blur-[120px] rounded-full animate-pulse-slow">
+        </div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-orange-600/10 blur-[120px] rounded-full animate-pulse-slow"
+            style="animation-delay: 2s;"></div>
+    </div>
+
+    <div class="z-10 text-center max-w-3xl">
+        <div
+            class="inline-flex items-center gap-2 px-4 py-1.5 mb-10 text-[10px] font-black tracking-[0.2em] text-red-500 uppercase border border-red-500/20 rounded-full bg-red-500/5">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+            </span>
+            Frontend Instance Active
+        </div>
+
+        <h1 class="text-6xl md:text-8xl font-black mb-8 tracking-tighter leading-tight">
+            VTU DIARY<br />// <span class="gradient-text">GOD MODE</span>
+        </h1>
+
+        <p class="text-gray-400 text-lg md:text-xl mb-14 font-light leading-relaxed max-w-xl mx-auto">
+            The automated parallel-swarm engine is active. The backend is being routed to high-performance dedicated
+            nodes for browser automation.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            <div class="glass p-8 rounded-3xl group hover:border-red-500/30 transition-all">
+                <div class="text-red-500 font-black text-3xl mb-1">99.9%</div>
+                <div class="text-gray-500 text-[10px] uppercase font-bold tracking-widest">Global Uptime</div>
+            </div>
+            <div class="glass p-8 rounded-3xl group hover:border-orange-500/30 transition-all">
+                <div class="text-orange-500 font-black text-3xl mb-1">Swarm</div>
+                <div class="text-gray-500 text-[10px] uppercase font-bold tracking-widest">Logic Ready</div>
+            </div>
+            <div class="glass p-8 rounded-3xl group hover:border-white/30 transition-all">
+                <div class="text-white font-black text-3xl mb-1">v3.0.4</div>
+                <div class="text-gray-500 text-[10px] uppercase font-bold tracking-widest">Build Version</div>
+            </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-5 justify-center">
+            <a href="https://github.com/rachan2005/VTU-nikki"
+                class="px-10 py-5 bg-white text-black font-black text-sm uppercase tracking-widest rounded-2xl hover:scale-105 transition-all shadow-2xl shadow-white/10">
+                Source Code
+            </a>
+            <div
+                class="px-10 py-5 glass text-white font-black text-sm uppercase tracking-widest rounded-2xl border-white/10 opacity-60">
+                Deploying Backend...
+            </div>
+        </div>
+    </div>
+
+    <!-- Binary Noise -->
+    <div class="fixed bottom-10 left-10 text-[8px] text-white/10 font-mono hidden lg:block">
+        01100111 01101111 01100100 00100000 01101101 01101111 01100100 01100101
+    </div>
+
+    <div class="fixed bottom-10 text-[10px] text-gray-700 font-bold uppercase tracking-[0.4em]">
+        © 2026 Parallel Swarm Technologies
+    </div>
+</body>
+
+</html>
