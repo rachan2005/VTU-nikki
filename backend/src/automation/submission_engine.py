@@ -39,11 +39,12 @@ def _ordinal(n: int) -> str:
 class PlaywrightSubmissionEngine:
     """Sequential Playwright submission -- one page, all entries, no timeouts."""
 
-    def __init__(self, max_workers: int = MAX_PARALLEL_BROWSERS, headless: bool = HEADLESS):
+    def __init__(self, max_workers: int = MAX_PARALLEL_BROWSERS, headless: bool = HEADLESS, credentials: Dict[str, Optional[str]] = None):
         if not PLAYWRIGHT_AVAILABLE:
             raise ImportError("pip install playwright && playwright install chromium")
         self.max_workers = max_workers
         self.headless = headless
+        self.credentials = credentials or {}
         logger.info(f"Playwright engine: sequential mode, headless={headless}")
 
     def submit_bulk(self, entries: List[Dict[str, Any]], progress_tracker: Dict = None) -> List[Dict[str, Any]]:
@@ -223,8 +224,17 @@ class PlaywrightSubmissionEngine:
 
         email = page.get_by_role("textbox", name="Enter your email address")
         await email.wait_for(timeout=10000)
-        await email.fill(VTU_USERNAME)
-        await page.get_by_role("textbox", name="Password").fill(VTU_PASSWORD)
+        
+        # Use portal credentials from request if available, fallback to env vars
+        username = self.credentials.get("portal_user") or VTU_USERNAME
+        password = self.credentials.get("portal_pass") or VTU_PASSWORD
+        
+        if not username or not password:
+            logger.error("No portal credentials found in request or environment")
+            raise Exception("Portal credentials missing")
+
+        await email.fill(username)
+        await page.get_by_role("textbox", name="Password").fill(password)
         await page.get_by_role("button", name="Sign In").click()
         await page.wait_for_load_state("networkidle")
         await asyncio.sleep(2)

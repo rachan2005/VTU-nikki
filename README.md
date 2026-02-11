@@ -95,7 +95,12 @@ VTU_PASSWORD=your_password
 
 ## Quick Start
 
-### 1. Install Dependencies
+### 1. Unified Setup (Recommended)
+```bash
+python setup.py
+```
+
+### 2. Manual Installation
 ```bash
 # Backend
 cd backend
