@@ -1,0 +1,8 @@
+{
+    "name": "vtu-nikki-root",
+    "version": "3.0.0",
+    "private": true,
+    "scripts": {
+        "vercel-build": "cd frontend && npm install && npm run build && cd .. && mkdir -p dist && cp -rv frontend/dist/* dist/"
+    }
+}

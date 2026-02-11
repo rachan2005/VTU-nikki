@@ -2,14 +2,10 @@
     "version": 2,
     "cleanUrls": true,
     "trailingSlash": false,
-    "routes": [
+    "rewrites": [
         {
-            "src": "/frontend/(.*)",
-            "dest": "/frontend/$1"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "/index.html"
+            "source": "/(.*)",
+            "destination": "/index.html"
         }
     ]
 }
