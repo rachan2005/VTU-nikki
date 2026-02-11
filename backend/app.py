@@ -16,11 +16,17 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # Fix for Windows asyncio + Playwright subprocess issue
 if sys.platform == 'win32':
-    asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+    try:
+        asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+    except Exception:
+        pass
 
 from src.api import router, websocket_endpoint
 from src.db import init_db
-from config import API_HOST, API_PORT, DEBUG_MODE
+try:
+    from config import API_HOST, API_PORT, DEBUG_MODE
+except ImportError:
+    API_HOST, API_PORT, DEBUG_MODE = "0.0.0.0", 5000, False
 from src.utils.logger import get_logger
 
 logger = get_logger(__name__)
