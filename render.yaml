@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: vtu-diary-backend
+    env: docker
+    plan: free
+    dockerContext: .
+    dockerfilePath: Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: CHROME_BIN
+        value: /usr/bin/google-chrome-stable

@@ -1,6 +1,6 @@
 import { credentialHeaders } from './credentials'
 
-const BASE = '/api'
+const BASE = import.meta.env.VITE_API_URL || '/api'
 
 /** Inject client-side credentials into every fetch call */
 function authFetch(url: string, opts: RequestInit = {}): Promise<Response> {
