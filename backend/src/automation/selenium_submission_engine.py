@@ -26,9 +26,10 @@ class SeleniumSubmissionEngine:
     Uses ThreadPoolExecutor for concurrent submissions with multiple browser instances.
     """
 
-    def __init__(self, max_workers: int = MAX_PARALLEL_BROWSERS, headless: bool = HEADLESS):
+    def __init__(self, max_workers: int = MAX_PARALLEL_BROWSERS, headless: bool = HEADLESS, credentials: Dict[str, Optional[str]] = None):
         self.max_workers = max_workers
         self.headless = headless
+        self.credentials = credentials or {}
         self.results = []
 
         logger.info(f"Selenium engine initialized: {max_workers} workers, headless={headless}")
@@ -107,7 +108,16 @@ class SeleniumSubmissionEngine:
 
             # Login to portal
             logger.info(f"Logging in for {date_str}")
-            submitter.login_manually(portal_url=PORTAL_LOGIN_URL)
+            
+            # Extract portal credentials
+            username = self.credentials.get("portal_user") or VTU_USERNAME
+            password = self.credentials.get("portal_pass") or VTU_PASSWORD
+            
+            # Check if we have credentials
+            if not username or not password:
+                raise Exception("Missing portal credentials (username/password)")
+
+            submitter.login_manually(portal_url=PORTAL_LOGIN_URL, credentials=self.credentials)
 
             # Transform entry fields to match VTU form expectations
             # AI generates "activities" but form expects "description"

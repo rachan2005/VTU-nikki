@@ -18,8 +18,8 @@ class VTUSubmitter:
         self.SESSION_DIR.mkdir(exist_ok=True)
         self.driver, self.wait = setup_driver(headless, profile_name, self.SESSION_DIR)
 
-    def login_manually(self, portal_url=None):
-        login(self.driver, self.wait, portal_url, self.SESSION_DIR, self.profile_name, self.wait_for_user)
+    def login_manually(self, portal_url=None, credentials=None):
+        login(self.driver, self.wait, portal_url, self.SESSION_DIR, self.profile_name, self.wait_for_user, credentials=credentials)
 
     def fill_diary(self, data, dry_run=True):
         return fill_diary(self.driver, self.wait, data, dry_run)

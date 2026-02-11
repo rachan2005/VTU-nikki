@@ -23,7 +23,7 @@ def manual_login_prompt(driver, wait_for_user=True, session_dir=None, profile_na
     except Exception as e:
         print(f"[VTU] ⚠ Could not save session: {e}")
 
-def login(driver, wait, portal_url=None, session_dir=None, profile_name="default", wait_for_user=True):
+def login(driver, wait, portal_url=None, session_dir=None, profile_name="default", wait_for_user=True, credentials=None):
     """Open portal and attempt automatic login."""
     if not portal_url:
         portal_url = os.getenv("PORTAL_LOGIN_URL", "https://vtu.internyet.in/sign-in")
@@ -48,8 +48,9 @@ def login(driver, wait, portal_url=None, session_dir=None, profile_name="default
             print("[VTU] Session expired")
             pass
     
-    email = os.getenv("VTU_EMAIL")
-    password = os.getenv("VTU_PASSWORD")
+    # Priority: passed credentials > env vars > legacy env vars
+    email = (credentials or {}).get("portal_user") or os.getenv("VTU_EMAIL") or os.getenv("VTU_USERNAME")
+    password = (credentials or {}).get("portal_pass") or os.getenv("VTU_PASSWORD")
     
     if not email or not password:
         manual_login_prompt(driver, wait_for_user, session_dir, profile_name)
