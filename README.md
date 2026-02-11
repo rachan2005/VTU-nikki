@@ -24,9 +24,9 @@ graph TD
         F --> G[VTU Internyet Portal]
     end
 
-    style B fill:#f9f,stroke:#333,stroke-width:2px
-    style D fill:#bbf,stroke:#333,stroke-width:2px
-    style G fill:#dfd,stroke:#333,stroke-width:2px
+    style B fill:#470447,stroke:#333,stroke-width:2px
+    style D fill:#090942,stroke:#333,stroke-width:2px
+    style G fill:#1d421d,stroke:#333,stroke-width:2px
 ```
 
 **Industrial-grade internship diary generation and automated submission for VTU's Internyet portal.**
