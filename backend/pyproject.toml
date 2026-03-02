@@ -1,0 +1,73 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vtu-internship-automation"
+version = "1.0.0"
+description = "Production-ready automation for VTU internship diary generation and submission"
+readme = "docs/README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [
+    {name = "VTU Automation Team"}
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+]
+dependencies = [
+    "fastapi>=0.110.0",
+    "uvicorn>=0.27.0",
+    "jinja2>=3.1.3",
+    "python-multipart>=0.0.9",
+    "itsdangerous>=2.1.2",
+    "selenium>=4.15.0",
+    "python-dotenv>=1.0.1",
+    "pydantic>=2.0.0",
+    "cryptography>=41.0.0",
+    "webdriver-manager>=4.0.0",
+    "requests>=2.31.0",
+    "openai>=1.3.0",
+    "google-genai>=0.3.0",
+    "pytest>=9.0.2",
+    "pytest-selenium>=4.1.0",
+    "pytest-cov>=7.0.0",
+    "black>=26.1.0",
+    "flake8>=7.3.0",
+    "isort>=7.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-selenium>=4.0.0",
+    "pytest-cov>=4.1.0",
+    "black>=23.0.0",
+    "flake8>=6.1.0",
+    "isort>=5.12.0",
+]
+
+[project.scripts]
+vtu-auto = "src.cli:cli"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+line_length = 100

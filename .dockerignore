@@ -1,0 +1,53 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# Node
+node_modules/
+npm-debug.log*
+frontend/.vite/
+frontend/dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Runtime data
+backend/data/*
+backend/logs/*
+backend/screenshots/*
+backend/input/*
+*.db
+*.sqlite
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Environment (will be mounted)
+.env
+.env.local
+
+# Static (will be mounted from build)
+static/
+
+# Other
+.DS_Store
+*.log
